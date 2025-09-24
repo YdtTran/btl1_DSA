@@ -111,6 +111,39 @@ template <class T> T SinglyLinkedList<T>::removeAt (int index) {
     return val;
 }
 
+template <class T> bool SinglyLinkedList<T>::removeItem (T e) {
+    // Remove first node
+    if (this->empty () == true) {
+        return false;
+    }
+
+    if (this->head->data == e) {
+        Node* tmp  = this->head;
+        this->head = this->head->next;
+        delete tmp;
+        if (this->head == nullptr) {
+            this->tail = nullptr;
+        }
+        return true;
+    }
+    Node* curr = this->head->next;
+    Node* prev = this->head;
+    while (curr != nullptr) {
+        if (curr->data == e) {
+            prev->next = curr->next;
+        }
+    }
+}
+
+template <class T> bool SinglyLinkedList<T>::empty () const {
+    return this->count == 0;
+}
+
+template <class T> int SinglyLinkedList<T>::size () const {
+    return this->count;
+}
+
+
 // ----------------- Iterator of SinglyLinkedList Implementation -----------------
 template <class T> SinglyLinkedList<T>::Iterator::Iterator (Node* node) {
     // TODO
